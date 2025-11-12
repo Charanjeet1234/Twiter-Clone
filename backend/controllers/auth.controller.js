@@ -19,7 +19,11 @@ export const signup = async (req, res) => {
     if (existingEmail) {
       return res.status(400).json({ error: "email is already in use" });
     }
-
+   
+    if(password.length < 6)
+    {
+        res.status(400).json({error:"Password length should be more than 6 digits"})
+    }
     // Hash Passowrd
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);

@@ -1,20 +1,21 @@
 import express from "express"
 import authRoutes from "./routes/auth.routes.js"
 import { connectDB } from "./config/db.js";
+import cors from "cors"
 const app = express()
 import dotenv from "dotenv"
 
 dotenv.config()
+app.use(cors()) //Allow All Origin
+const PORT = process.env.PORT || 8080
+
+app.use(express.json()) // to parse req.body
+app.use(express.urlencoded({extended:true})) // for x-www-form  in postman to parse form data in url coded
+
 app.use("/api/auth", authRoutes);
-app.get('/', (req, res)=>
-{
-    res.send("Server is ready")
-})
 
-
-
-app.listen(8000, () =>
+app.listen(PORT, () =>
 {
     connectDB()
-    console.log("App is running at 8000")
+    console.log("Server is running at " + `http://localhost:${PORT}`)
 })

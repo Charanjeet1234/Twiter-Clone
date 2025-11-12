@@ -3,8 +3,7 @@ import { signup , login, logout} from "../controllers/auth.controller.js"
 const router = express.Router()
 
 // For Signup
-router.get("/signup", signup)
-
+router.post("/signup", signup)
 
 // For Login
 router.get("/login",login)

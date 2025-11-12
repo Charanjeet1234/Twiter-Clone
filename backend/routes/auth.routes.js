@@ -1,11 +1,10 @@
 import express from "express"
-
+import { signup } from "../controllers/auth.controller.js"
 const router = express.Router()
 
-router.get("/signup",(req,res)=>
-{
-    res.json({data:"you hit signup Button"})
-})
+// For Signup
+router.get("/signup", signup)
+
 
 // For Login
 router.get("/login",(req,res)=>

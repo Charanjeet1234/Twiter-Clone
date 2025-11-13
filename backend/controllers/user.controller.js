@@ -56,13 +56,37 @@ export const followUnfollowUser = async (req, res) =>
           await newNotification.save()
         //   Later change send the user id instead of message
         res.status(200).json({message:"User followed successfully"})
-        
-
-    }
-
-    try {
-        
-    } catch (error) {
-        
     }
 }
+
+
+// API function for getSuggestedUsers
+export const getSuggestedUsers = async (req,res) =>
+{
+    try {
+
+        const userId = req.user._id;
+
+        const userFollowedByMe = await User.findById(userId).select("following")
+
+        const users = await User.aggregate([
+            {
+                $match:{
+                    _id:{$ne:userId}
+                }
+            },
+            {$sample:{size:10}}
+        ])
+
+        const filteredUsers = users.filter(user=>!userFollowedByMe.following.includes(user._id))
+        const suggestUser = filteredUsers.slice(0,4)
+        suggestUser.forEach(user=>user.password=null) 
+        res.status(200).json(suggestUser)
+        
+    } catch (error) {
+        console.log("Error" , error.message)
+        res.status(500).json({error:"Internale Server Error"})
+    }
+}
+
+

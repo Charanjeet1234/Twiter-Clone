@@ -4,9 +4,11 @@ import { connectDB } from "./config/db.js";
 import cors from "cors"
 const app = express()
 import dotenv from "dotenv"
+import cookieParser from "cookie-parser";
 
 dotenv.config()
 app.use(cors()) //Allow All Origin
+app.use(cookieParser()) //Allow cookies to save
 const PORT = process.env.PORT || 8080
 
 app.use(express.json()) // to parse req.body

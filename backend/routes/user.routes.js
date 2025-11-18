@@ -8,5 +8,6 @@ router.get("/suggested",protectRoute, getSuggestedUsers)
 router.get("/follow/:id",protectRoute, followUnfollowUser)
 router.post("/update",protectRoute, updateUser)
 
-
 export default router
+
+

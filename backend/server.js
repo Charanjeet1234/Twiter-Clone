@@ -2,6 +2,7 @@ import express from "express"
 import authRoutes from "./routes/auth.routes.js"
 import userRoutes from "./routes/user.routes.js"
 import postRoutes from "./routes/post.routes.js"
+import notificationRoutes from "./routes/notification.routes.js"
 import { connectDB } from "./config/db.js";
 import cors from "cors"
 const app = express()
@@ -27,7 +28,8 @@ app.use(express.urlencoded({extended:true})) // for x-www-form  in postman to pa
 
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
-app.use("/api/post", postRoutes)
+app.use("/api/post", postRoutes);
+app.use("/api/notifications", notificationRoutes)
 
 app.listen(PORT, () =>
 {

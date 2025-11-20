@@ -4,12 +4,12 @@ import {v2 as cloudinary} from "cloudinary"
 import User from "../models/user.model.js";
 import Notification from "../models/notification.model.js";
 // API to get user profile
-export const getUserProfile = async () =>
+export const getUserProfile = async (req,res) =>
 {
     const {username} = req.params;
 
     try {
-        const user = await User.fineOne({username}).select("-password")
+        const user = await User.findOne({username}).select("-password")
         if(!user)
         {
             return res.status(400).json({message:"User not found"})

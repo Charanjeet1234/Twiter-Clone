@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 const userSchema = new mongoose.Schema(
   {
     username: {
@@ -53,8 +52,15 @@ const userSchema = new mongoose.Schema(
       default: "",
     },
 
-    // Created at
+    likedPosts:[
+      {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Post",
+        default:[],
+      }
+    ]
   },
+// Created at
   { timestamps: true }
 );
 
